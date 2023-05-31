@@ -30,23 +30,7 @@ spring:
 #        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
         ddl-auto: update
-#  mail:
-#    host: smtp.gmail.com
-#    host_address: localhost:8080
-#    username: elmehdi.adnani2@gmail.com
-#    password: vkqfshqtgbbtqwjj
-#    port: 587
-#    properties:
-#      mail:
-#        smtp:
-#          auth: true
-#          connectiontimeout: 5000
-#          starttls:
-#            enable: true
-#            required: true
-#          timeout: 5000
-#          writetimeout: 5000
-#    protocol: smtp
+
   mvc:
     throw-exception-if-no-handler-found: true
 
