@@ -1,0 +1,46 @@
+
+<div class="address container">
+    <div class="title">
+      <p>Gestion des usitilisateurs</p>
+    </div>
+    <hr>
+    <div *ngIf="innerLoading" class="loader"></div>
+  
+    <div *ngIf="!innerLoading">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+   
+            <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+            <th>Utilisateur</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Statut</th>
+            <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of users; let i = index">
+            <td>{{i+1}}</td>
+            <td><a >{{user.firstName+" "+user.lastName}}</a></td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td *ngIf="user.emailVerified==0"><span class="status text-warning">&bull;</span> Desactivé</td>
+            <td *ngIf="user.emailVerified==1 "><span class="status text-success">&bull;</span> Activé</td>
+            
+            <td>
+            <a class="settings" [title]="user.emailVerified==0?'Activer':'Desactiver'" data-toggle="tooltip" (click)="acivateInactivateUser(!user.emailVerified,user.email)"><i class="material-icons">&#xE8B8;</i></a>
+            <a class="delete" title="Supprimer" data-toggle="tooltip" (click)="deleteUser(user.email)"><i class="material-icons">&#xE5C9;</i></a>
+            </td>
+            </tr>
+            
+            </tbody>
+            </table>
+
+            </div>
+            </div>
+    </div>
+  </div>
+  

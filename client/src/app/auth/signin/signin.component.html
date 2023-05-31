@@ -1,0 +1,70 @@
+<div class="signin container">
+
+  <div class="title row">
+    <div class="col-md-4">
+      <img src="../../../assets/key.png" alt="login key">
+    </div>
+    <div class="col-md-8">
+      <p>LOGIN</p>
+      <span>Bienvenue au Fish Store</span>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngFor="let e of (authState | async).errors">
+        <div *ngIf="e.errorEffect == 'SIGN_IN'" class="alert-warning">
+          <div *ngIf="e.error.status === 400">Cordonnees non valides</div>
+          <div *ngIf="e.error.status === 401">401 Error</div>
+          <div *ngIf="e.error.status === 500 || e.error.status === 0">Une erreur s'est produite
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form row">
+    <div class="col-md-12">
+      <div *ngIf="(authState | async).loading" class="loader"></div>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmitted()">
+        <div class="form-group">
+          <label for="email">EMAIL</label>
+          <input type="text" id="email" class="form-control" name="email" formControlName="email" [maxlength]="240">
+          <span *ngIf="signInForm.get('email').invalid && signInForm.get('email').touched" class="alert-danger">
+            Veuillez saisir un email valide!
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" class="form-control" name="password" formControlName="password"
+            [maxlength]="240">
+          <span *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched">
+            <span *ngIf="signInForm.get('password').errors.required" class="alert-danger">Ce champ est obligatoire</span>
+            <span *ngIf="signInForm.get('password').errors.minlength" class="alert-danger">Minimum longueur est 6!</span>
+          </span>
+        </div>
+
+  
+
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-info" type="submit"
+              [disabled]="signInForm.invalid || signInForm.pending || (authState | async).loading">Se connecter
+            </button>
+          </div>
+        </div>
+
+        <div class="signup row">
+          <div class="col-md-12">
+            <a routerLink="/signup">
+              <p>Vous n'avez pas un complte? <span>S'inscrire!</span></p>
+            </a>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

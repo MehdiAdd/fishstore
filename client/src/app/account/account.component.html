@@ -1,0 +1,40 @@
+<div class="account container">
+  <div class="row">
+    <div class="links col-md-3">
+      <div class="title">
+        <p>Compte</p>
+      </div>
+      <div>
+        <a routerLink="/account/information" routerLinkActive="active">
+          <i class="fa fa-user-o" aria-hidden="true"></i>
+          <p>Information d'utilisateur</p>
+        </a>
+      </div>
+      <div *ngIf="checkAdmin">
+        <a routerLink="/account/users" routerLinkActive="active">
+          <i class="fa fa-user-o" aria-hidden="true"></i>
+          <p>Gerer les usitilisateurs</p>
+        </a>
+      </div>
+      <div>
+        <a routerLink="/account/orders" routerLinkActive="active"> <i class="fa fa-archive" aria-hidden="true"></i>
+          <p>Ordres</p>
+        </a>
+      </div>
+      <div>
+        <a routerLink="/account/address" routerLinkActive="active"><i class="fa fa-home" aria-hidden="true"></i>
+          <p>Addresse</p>
+        </a>
+      </div>
+      <div>
+        <a routerLink="/account/help" routerLinkActive="active"> <i class="fa fa-question-circle-o"
+            aria-hidden="true"></i>
+          <p>Help</p>
+        </a>
+      </div>
+    </div>
+    <div class="panel col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="list-orders container">
+
+  <div class="title row">
+    <div class="col-md-12">
+      <p>Ordres</p>
+    </div>
+  </div>
+  <hr>
+
+  <div *ngIf="fetchError" class="row">
+    <div class="col-md-12">
+      <div class="alert-warning">Un erreur s'est produit, Repeter.</div>
+    </div>
+  </div>
+
+  <div *ngIf="noOrders" class="row">
+    <div class="col-md-12">
+      <p class="no-order">Vous avez aucun ordre. <a routerLink="/browse">Parcourir!</a></p>
+    </div>
+  </div>
+
+  <div *ngIf="innerLoading" class="loader"></div>
+
+  <div *ngIf="!fetchError" class="row">
+    <div *ngFor="let order of orders" class="order col-md-12">
+      <div class="order-title">
+        <div class="row">
+          <div class="col-md-3">
+            <p>ORDRE: <span>#{{order.id}}</span></p>
+          </div>
+          <div class="date col-md-6">
+            <p>DATE: <span>{{convertDate(order.date) }}</span></p>
+          </div>
+          <div class="status col-md-3">
+            <p>STATUT: <span>{{order.shipped === 0 ? 'En preparation' :  'Livré'}}</span></p>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-7 left-panel">
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <p>Nom: <span>{{order.shipName}}</span></p>
+            </div>
+            <div class="col-md-6 col-6">
+              <p>Tele.: <span>{{order.phone}}</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <p>Ville: <span>{{order.country}}</span></p>
+            </div>
+            <div class="col-md-6 col-6">
+              <p>Quartier: <span>{{order.city}}</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <p>Zip Code: <span>{{order.zip}}</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <p>Prix de livraison: <span>{{order.totalCargoPrice}} DH</span></p>
+            </div>
+            <div class="col-md-6 col-6">
+              <p>Prix final: <span>{{ order.totalPrice }} DH</span></p>
+            </div>
+          </div>
+     
+          <div class="row">
+            <div class="col-md-12 col-12">
+              <p>Addresse: <span>{{order.shipAddress}}</span></p>
+            </div>
+          </div>
+   
+
+        </div>
+        <div class="col-md-5 right-panel">
+          <div class="row item-list">
+            <div *ngFor="let orderDetail of order.orderItems" class="col-md-12 col-12 pb-4">
+              <div class="row item" (click)="goToItem(orderDetail.url)">
+                <!-- <div class="col-md-4">
+                  <div class="color" [ngStyle]="{'background-color': orderDetail.color.hex}"></div>
+                  <img src="{{orderDetail.thumb}}" alt="{{orderDetail.name}}">
+                </div> -->
+                <div class="col-md-8 details">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="product-name">{{orderDetail.name}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p class="amount">Quantite: <span>{{orderDetail.amount}}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="price">{{orderDetail.price}} DH</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+
+  <div class="row bottom">
+    <div class="col md-12 col-12">
+      <ngb-pagination *ngIf="!noOrders" [collectionSize]="collectionSize" [pageSize]="pageSize" [(page)]="page"
+        [rotate]="true" [maxSize]="5" (pageChange)="pageNavigation()" class="d-flex justify-content-end"
+        aria-label="pagination"></ngb-pagination>
+    </div>
+  </div>
+
+</div>

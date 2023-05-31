@@ -1,0 +1,76 @@
+<div class="display container-fluid">
+    <div class="row" *ngIf="(productState | async).products && (productState | async).products.productItems && (productState | async).products.productItems.length > 0 ;else emptyCart">
+      <div class="cart-info col-md-7">
+        <div class="title">
+          <p>Liste des poissons</p>
+          
+        </div>
+        <div *ngFor="let e of (productState | async).errors">
+          <div *ngIf="e.errorEffect == 'REMOVE_FROM_CART'" class="alert-warning p-2">
+            <div *ngIf="e.error.status === 400 || e.error.status === 401">Could not remove item.</div>
+            <div *ngIf="e.error.status === 500 || e.error.status === 0">Internal server error! Please contact our
+              support team.
+            </div>
+          </div>
+        </div>
+        <div class="row item" *ngFor="let cartItem of (productState | async).products.productItems">
+          <div class="col-md-3 product-image">
+            <!-- <div class="color" [ngStyle]="{'background-color': cartItem.color.hex}"></div> -->
+            <img src="{{cartItem.productVariant.thumb}}" alt="{{cartItem.name}}" (click)="goToItem(cartItem.url)" />
+          </div>
+  
+          <div class="col-md-3 description" (click)="goToItem(cartItem.url)">
+            <span>
+              {{cartItem.name}}
+            </span>
+          </div>
+          
+          <div class="col-md-3 quantity">
+            <div *ngIf="(productState | async).loading" class="loader"></div>
+            <div *ngIf="!(productState | async).loading">
+              <button class="minus-btn" type="button" (click)="amountDecrement(cartItem.id)">
+                -
+              </button>
+              <span>{{cartItem.productVariant.stock}}</span>
+              <button class="plus-btn" type="button" (click)="amountIncrement(cartItem.id)">
+                +
+              </button>
+            </div>
+          </div>
+  
+          <div class="col-md-2 item-price">
+            <span >{{cartItem.productVariant.price}} DH</span>
+          
+          </div>
+  
+          <div class="col-md-1 delete">
+            <div *ngIf="(productState | async).loading" class="loader"></div>
+            <span *ngIf="!(productState | async).loading" (click)="removeFromCart(cartItem.id)">x</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+
+    </div>
+    <div class="summary col-md-4">
+     
+  
+      <div class="checkout">
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn" (click)="activatePurchase()">Ajouter</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #emptyCart>
+    <div *ngIf="(productState | async).fetchLoading" class="loader"></div>
+    <div *ngIf="(productState | async).fetchLoading == false">
+      <app-empty-cart></app-empty-cart>
+    </div>
+  </ng-template>
+
+  

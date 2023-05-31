@@ -1,0 +1,19 @@
+<div class="container faq">
+  <div class="title">
+    <p>FAQ</p>
+  </div>
+  <hr>
+  <div class="accordion">
+    <ngb-accordion #acc="ngbAccordion" [closeOthers]="false" [destroyOnHide]="true">
+      <ngb-panel id="static-1">
+        <ng-template ngbPanelTitle>
+          <span class="panel-title">Fish Store?</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Ecrire qlq chose
+        </ng-template>
+      </ngb-panel>
+
+    </ngb-accordion>
+  </div>
+</div>

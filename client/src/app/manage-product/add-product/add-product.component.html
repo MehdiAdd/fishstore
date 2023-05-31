@@ -1,0 +1,137 @@
+<div class="checkout container-fluid">
+    <div class="row">
+      <div class="col-md-7">
+       
+        <div class="personal">
+
+            <div *ngIf="innerLoading" class="loader"></div>
+          
+            <div *ngIf="!innerLoading">
+              <form [formGroup]="personalForm" (ngSubmit)="onSubmitOrderForm()">
+                <div class="info row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="name">Nom du Poisson</label>
+                      <input type="text" id="name" class="form-control" name="name" formControlName="name"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('name').invalid && personalForm.get('name').touched">
+                        <span *ngIf="personalForm.get('name').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="category">Categorie</label>
+                      <input type="text" id="category" class="form-control" name="category" formControlName="category"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('category').invalid && personalForm.get('category').touched">
+                        <span *ngIf="personalForm.get('category').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="description">Description</label>
+                      <input type="text" id="description" class="form-control" name="description" formControlName="description"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('description').invalid && personalForm.get('description').touched">
+                        <span *ngIf="personalForm.get('description').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="description">Prix</label>
+                      <input type="text" id="price" class="form-control" name="price" formControlName="price"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('price').invalid && personalForm.get('price').touched">
+                        <span *ngIf="personalForm.get('price').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="cargo_price">Prix de livrasion</label>
+                      <input type="text" id="cargo_price" class="form-control" name="cargo_price" formControlName="cargo_price"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('cargo_price').invalid && personalForm.get('cargo_price').touched">
+                        <span *ngIf="personalForm.get('cargo_price').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="tax_percent">Taxe</label>
+                      <input type="text" id="tax_percent" class="form-control" name="tax_percent" formControlName="tax_percent"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('tax_percent').invalid && personalForm.get('tax_percent').touched">
+                        <span *ngIf="personalForm.get('tax_percent').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+
+               
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="stock">Qte en stock</label>
+                      <input type="text" id="stock" class="form-control" name="stock" formControlName="stock"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('stock').invalid && personalForm.get('stock').touched">
+                        <span *ngIf="personalForm.get('stock').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="image">Image</label>
+                      <input type="text" id="image" class="form-control" name="image" formControlName="image"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('image').invalid && personalForm.get('image').touched">
+                        <span *ngIf="personalForm.get('image').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="thumb">Miniature</label>
+                      <input type="text" id="thumb" class="form-control" name="thumb" formControlName="thumb"
+                        [maxlength]="104">
+                      <span *ngIf="personalForm.get('thumb').invalid && personalForm.get('thumb').touched">
+                        <span *ngIf="personalForm.get('thumb').errors['required']" class="alert-danger">Ce champ est obligatoire!</span>
+                      </span>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                  </div>
+                  <div class="controls col-md-6">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a routerLink="/manage" class="btn back" type="button">
+                          Retour
+                        </a>
+                      </div>
+                      <div class="col-md-6">
+                        <button class="btn btn-info" type="submit" [disabled]="personalForm.invalid || personalForm.pending">
+                          Ajouter
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+          
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-1"></div>
+      
+  </div>
